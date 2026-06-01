@@ -140,6 +140,17 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
               <p className="text-sm text-red-600">{state.errors.qualityP[0]}</p>
             )}
           </div>
+
+          <div className="space-y-2">
+            <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Keterangan (Opsional)</label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows={3}
+              placeholder="Detail pengambilan telur"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
         </div>
 
         <div className="mt-8">

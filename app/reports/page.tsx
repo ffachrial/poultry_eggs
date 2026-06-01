@@ -44,6 +44,7 @@ export default async function ReportsPage() {
                  "Grade S": log.qualityS,
                  "Grade R": log.qualityR,
                  "Grade P": log.qualityP,
+                 "Keterangan": log.notes || "-",
                  "Total Bagus": log.totalGood
                }))}
                filename={`Laporan_Produksi_${new Date().toISOString().split('T')[0]}`}
@@ -63,26 +64,30 @@ export default async function ReportsPage() {
         <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
           <table className="w-full text-left min-w-150">
             <thead>
-              <tr className="text-gray-500 text-sm border-b">
-                <th className="pb-3 font-medium">Tanggal</th>
-                <th className="pb-3 font-medium">Kandang</th>
-                <th className="pb-3 font-medium text-center">Grade S</th>
-                <th className="pb-3 font-medium text-center">Grade R</th>
-                <th className="pb-3 font-medium text-center">Grade P</th>
-                <th className="pb-3 font-medium text-right">Total Bagus</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {eggLogs.map((log) => (
-                <tr key={log.id} className="text-sm text-gray-900">
-                  <td className="py-3">{new Date(log.date).toLocaleDateString("id-ID")}</td>
-                  <td className="py-3">{log.cage.name}</td>
-                  <td className="py-3 text-center">{log.qualityS}</td>
-                  <td className="py-3 text-center">{log.qualityR}</td>
-                  <td className="py-3 text-center">{log.qualityP}</td>
-                  <td className="py-3 text-right font-bold">{log.totalGood}</td>
-                </tr>
-              ))}
+               <tr className="text-gray-500 text-sm border-b">
+                 <th className="pb-3 font-medium">Tanggal</th>
+                 <th className="pb-3 font-medium">Kandang</th>
+                 <th className="pb-3 font-medium text-center">Grade S</th>
+                 <th className="pb-3 font-medium text-center">Grade R</th>
+                 <th className="pb-3 font-medium text-center">Grade P</th>
+                 <th className="pb-3 font-medium">Keterangan</th>
+                 <th className="pb-3 font-medium text-right">Total Bagus</th>
+               </tr>
+             </thead>
+             <tbody className="divide-y">
+               {eggLogs.map((log) => (
+                 <tr key={log.id} className="text-sm text-gray-900">
+                   <td className="py-3">{new Date(log.date).toLocaleDateString("id-ID")}</td>
+                   <td className="py-3">{log.cage.name}</td>
+                   <td className="py-3 text-center">{log.qualityS}</td>
+                   <td className="py-3 text-center">{log.qualityR}</td>
+                   <td className="py-3 text-center">{log.qualityP}</td>
+                   <td className="py-3 text-gray-500 italic text-xs max-w-[120px] truncate" title={log.notes || ""}>
+                     {log.notes || "-"}
+                   </td>
+                   <td className="py-3 text-right font-bold">{log.totalGood}</td>
+                 </tr>
+               ))}
             </tbody>
           </table>
         </div>

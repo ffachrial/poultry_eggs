@@ -84,6 +84,7 @@ model EggLog {
   qualityR  Int      @default(0)
   qualityP  Int      @default(0)
   totalGood Int // S + R
+  notes     String?
 
   cage Cage @relation(fields: [cageId], references: [id], onDelete: Cascade)
 

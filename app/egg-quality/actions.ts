@@ -11,6 +11,7 @@ const eggLogSchema = z.object({
   qualityS: z.coerce.number().int().min(0, "Kualitas S tidak boleh negatif"),
   qualityR: z.coerce.number().int().min(0, "Kualitas R tidak boleh negatif"),
   qualityP: z.coerce.number().int().min(0, "Kualitas P tidak boleh negatif"),
+  notes: z.string().optional(),
 });
 
 export type EggLogState = {
@@ -20,6 +21,7 @@ export type EggLogState = {
     qualityS?: string[];
     qualityR?: string[];
     qualityP?: string[];
+    notes?: string[];
     global?: string[];
   };
   message?: string | null;
@@ -42,6 +44,7 @@ export async function createEggLog(prevState: EggLogState, formData: FormData): 
     qualityS: formData.get("qualityS"),
     qualityR: formData.get("qualityR"),
     qualityP: formData.get("qualityP"),
+    notes: formData.get("notes"),
   });
 
   if (!validatedFields.success) {
@@ -51,7 +54,7 @@ export async function createEggLog(prevState: EggLogState, formData: FormData): 
     };
   }
 
-  const { cageId, date, qualityS, qualityR, qualityP } = validatedFields.data;
+  const { cageId, date, qualityS, qualityR, qualityP, notes } = validatedFields.data;
   const totalGood = qualityS + qualityR;
 
   try {
@@ -63,6 +66,7 @@ export async function createEggLog(prevState: EggLogState, formData: FormData): 
         qualityR,
         qualityP,
         totalGood,
+        notes,
       },
     });
 

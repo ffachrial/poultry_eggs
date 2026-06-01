@@ -38,7 +38,8 @@ export default async function EggQualityPage() {
                   <th className="pb-3 font-medium text-center">Grade S</th>
                   <th className="pb-3 font-medium text-center">Grade R</th>
                   <th className="pb-3 font-medium text-center">Grade P</th>
-                  <th className="pb-3 font-medium text-right">Total Bagus</th>
+                  <th className="pb-3 font-medium">Keterangan</th>
+                  <th className="pb-3 font-medium text-right">Total</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -49,6 +50,9 @@ export default async function EggQualityPage() {
                     <td className="py-4 text-center">{log.qualityS}</td>
                     <td className="py-4 text-center">{log.qualityR}</td>
                     <td className="py-4 text-center">{log.qualityP}</td>
+                    <td className="py-4 text-gray-500 italic text-xs max-w-[150px] truncate" title={log.notes || ""}>
+                      {log.notes || "-"}
+                    </td>
                     <td className="py-4 text-right font-bold text-blue-600">{log.totalGood}</td>
                   </tr>
                 ))}
