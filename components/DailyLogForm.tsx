@@ -13,7 +13,7 @@ const initialState: DailyLogState = {
 export default function DailyLogForm({ cages }: { cages: Cage[] }) {
   const [state, formAction, isPending] = useActionState(createDailyLog, initialState);
   const { data: session } = useSession();
-  const isAdmin = (session?.user as any)?.role === "ADMIN";
+  const isAdmin = session?.user && (session.user as { role?: string }).role === "ADMIN";
 
   useEffect(() => {
     if (state.success) {
@@ -54,7 +54,7 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
               id="cageId"
               name="cageId"
               required
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
               <option value="">Pilih Kandang</option>
               {cages.map((cage) => (
@@ -74,7 +74,7 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
               name="date"
               defaultValue={new Date().toISOString().split('T')[0]}
               required
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             {state.errors?.date && (
               <p className="text-sm text-red-600">{state.errors.date[0]}</p>
@@ -87,7 +87,7 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
               id="timeSlot"
               name="timeSlot"
               required
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
               <option value="">Pilih Waktu</option>
               <option value="PAGI">PAGI</option>
@@ -111,10 +111,10 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
                 name="mortality"
                 min="0"
                 required
-                className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 placeholder="0"
+                className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
-              <span className="absolute right-3 top-2 text-gray-400 text-sm">Ekor</span>
+              <span className="absolute right-3 top-3 text-gray-400 text-sm">Ekor</span>
             </div>
             {state.errors?.mortality && (
               <p className="text-sm text-red-600">{state.errors.mortality[0]}</p>
@@ -131,10 +131,10 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
                 name="feedQuantity"
                 min="0"
                 required
-                className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 placeholder="0"
+                className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
-              <span className="absolute right-3 top-2 text-gray-400 text-sm">Kg</span>
+              <span className="absolute right-3 top-3 text-gray-400 text-sm">Kg</span>
             </div>
             {state.errors?.feedQuantity && (
               <p className="text-sm text-red-600">{state.errors.feedQuantity[0]}</p>
@@ -146,7 +146,7 @@ export default function DailyLogForm({ cages }: { cages: Cage[] }) {
           <button
             type="submit"
             disabled={isPending}
-            className={`w-full md:w-auto md:px-6 py-3 md:py-2 rounded-lg font-medium text-white transition-colors ${
+            className={`w-full rounded-lg px-6 py-3 text-base font-medium text-white transition-colors ${
               isPending ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >

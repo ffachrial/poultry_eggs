@@ -34,10 +34,10 @@ export default function RevenueChart({ data, title, type = "line" }: RevenueChar
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-[400px]">
-      <h3 className="text-lg font-semibold mb-6">{title}</h3>
-      <div className="h-[300px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+    <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100 h-75 sm:h-100">
+      <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">{title}</h3>
+      <div className="h-55 sm:h-75 w-full">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
           {type === "line" ? (
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
@@ -45,18 +45,23 @@ export default function RevenueChart({ data, title, type = "line" }: RevenueChar
                 dataKey="date" 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#9ca3af', fontSize: 12 }}
+                tick={{ fill: '#9ca3af', fontSize: 10 }}
                 dy={10}
+                interval="preserveStartEnd"
               />
               <YAxis 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#9ca3af', fontSize: 12 }}
+                tick={{ fill: '#9ca3af', fontSize: 10 }}
                 tickFormatter={(value) => `Rp ${value / 1000}k`}
               />
               <Tooltip 
                 formatter={(value) => [formatCurrency(Number(value)), "Pendapatan"]}
-                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: '12px' }}
+              />
+              <Legend 
+                wrapperStyle={{ fontSize: 11, paddingTop: 4 }}
+                iconSize={8}
               />
               <Line 
                 type="monotone" 
@@ -74,18 +79,23 @@ export default function RevenueChart({ data, title, type = "line" }: RevenueChar
                 dataKey="date" 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#9ca3af', fontSize: 12 }}
+                tick={{ fill: '#9ca3af', fontSize: 10 }}
                 dy={10}
+                interval="preserveStartEnd"
               />
               <YAxis 
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: '#9ca3af', fontSize: 12 }}
+                tick={{ fill: '#9ca3af', fontSize: 10 }}
                 tickFormatter={(value) => `Rp ${value / 1000}k`}
               />
               <Tooltip 
                 formatter={(value) => [formatCurrency(Number(value)), "Pendapatan"]}
-                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: '12px' }}
+              />
+              <Legend 
+                wrapperStyle={{ fontSize: 11, paddingTop: 4 }}
+                iconSize={8}
               />
               <Bar dataKey="revenue" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>

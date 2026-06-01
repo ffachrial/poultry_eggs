@@ -35,7 +35,7 @@ export default function NavWrapper({ children }: { children: React.ReactNode }) 
       <header className="lg:hidden flex h-16 items-center justify-between border-b bg-white px-4 sticky top-0 z-30">
         <button
           onClick={() => setIsOpen(true)}
-          className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"
+          className="p-3 text-gray-600 hover:bg-gray-100 rounded-lg touch-manipulation"
           aria-label="Open menu"
         >
           <Menu className="h-6 w-6" />
@@ -47,14 +47,14 @@ export default function NavWrapper({ children }: { children: React.ReactNode }) 
       {/* Mobile Sidebar Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Mobile Sidebar Drawer */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col transform bg-gray-900 transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 flex flex-col transform bg-gray-900 shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -62,7 +62,7 @@ export default function NavWrapper({ children }: { children: React.ReactNode }) 
           <span className="text-xl font-bold text-white tracking-wider">MENU</span>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-gray-400 hover:text-white"
+            className="p-3 text-gray-400 hover:text-white rounded-lg touch-manipulation"
             aria-label="Close menu"
           >
             <X className="h-6 w-6" />

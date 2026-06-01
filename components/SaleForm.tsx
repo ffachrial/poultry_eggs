@@ -12,7 +12,7 @@ const initialState: SaleState = {
 export default function SaleForm() {
   const [state, formAction, isPending] = useActionState(createSale, initialState);
   const { data: session } = useSession();
-  const isAdmin = (session?.user as any)?.role === "ADMIN";
+  const isAdmin = session?.user && (session.user as { role?: string }).role === "ADMIN";
 
   useEffect(() => {
     if (state.success) {
@@ -50,12 +50,12 @@ export default function SaleForm() {
           <div className="space-y-2">
             <label htmlFor="date" className="block text-sm font-medium text-gray-700">Tanggal Penjualan</label>
           <input
-            type="text"
-            id="pembeli"
-            name="pembeli"
+            type="date"
+            id="date"
+            name="date"
             required
-            className="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="Nama pembeli"
+            defaultValue={new Date().toISOString().split("T")[0]}
+            className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
             {state.errors?.date && (
               <p className="text-sm text-red-600">{state.errors.date[0]}</p>
@@ -65,12 +65,12 @@ export default function SaleForm() {
           <div className="space-y-2">
             <label htmlFor="buyerName" className="block text-sm font-medium text-gray-700">Nama Pembeli</label>
           <input
-            type="date"
-            id="tanggal"
-            name="tanggal"
+            type="text"
+            id="buyerName"
+            name="buyerName"
             required
-            defaultValue={new Date().toISOString().split("T")[0]}
-            className="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            placeholder="Nama pembeli"
           />
             {state.errors?.buyerName && (
               <p className="text-sm text-red-600">{state.errors.buyerName[0]}</p>
@@ -85,14 +85,14 @@ export default function SaleForm() {
             <input
               type="number"
               step="0.01"
-              id="jumlah"
-              name="jumlah"
+              id="weightKg"
+              name="weightKg"
               min="0"
               required
               placeholder="0.00"
-              className="block w-full rounded-md border-gray-300 bg-gray-50 pl-3 pr-12 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 pl-4 pr-12 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-              <span className="absolute right-3 top-2 text-gray-400 text-sm">Kg</span>
+              <span className="absolute right-3 top-3 text-gray-400 text-sm">Kg</span>
             </div>
             {state.errors?.weightKg && (
               <p className="text-sm text-red-600">{state.errors.weightKg[0]}</p>
@@ -102,15 +102,15 @@ export default function SaleForm() {
           <div className="space-y-2">
             <label htmlFor="unitPrice" className="block text-sm font-medium text-gray-700">Harga per Kg</label>
             <div className="relative">
-              <span className="absolute left-3 top-2 text-gray-400 text-sm">Rp</span>
+              <span className="absolute left-3 top-3 text-gray-400 text-sm">Rp</span>
             <input
               type="number"
-              id="harga"
-              name="harga"
+              id="unitPrice"
+              name="unitPrice"
               min="0"
               required
               placeholder="0"
-              className="block w-full rounded-md border-gray-300 bg-gray-50 pl-12 pr-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 pl-12 pr-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             </div>
             {state.errors?.unitPrice && (
@@ -124,9 +124,9 @@ export default function SaleForm() {
           <textarea
             id="notes"
             name="notes"
-            rows={2}
+            rows={3}
             placeholder="Catatan tambahan..."
-            className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -134,7 +134,7 @@ export default function SaleForm() {
           <button
             type="submit"
             disabled={isPending}
-            className={`w-full md:w-auto md:px-6 py-3 md:py-2 rounded-lg font-medium text-white transition-colors ${
+            className={`w-full rounded-lg px-6 py-3 text-base font-medium text-white transition-colors ${
               isPending ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >

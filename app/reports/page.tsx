@@ -32,11 +32,11 @@ export default async function ReportsPage() {
   ]);
 
    return (
-     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
+     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
          <div className="flex flex-col items-center lg:flex-row lg:items-baseline lg:justify-between w-full">
-           <h1 className="text-xl lg:text-2xl font-bold text-gray-800">Laporan & Rekapitulasi</h1>
-           <div className="flex gap-2 mt-4 lg:mt-0 print:hidden">
+           <h1 className="text-xl lg:text-2xl font-bold text-gray-800 text-center lg:text-left">Laporan & Rekapitulasi</h1>
+           <div className="flex flex-wrap justify-center gap-2 mt-4 lg:mt-0 print:hidden">
              <ExportButton 
                data={eggLogs.map(log => ({
                  Tanggal: new Date(log.date).toLocaleDateString("id-ID"),
@@ -58,10 +58,10 @@ export default async function ReportsPage() {
        </div>
 
       {/* Egg Production Report */}
-      <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-        <h2 className="text-lg font-semibold mb-4 border-b pb-2">Produksi Telur (30 Hari Terakhir)</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
+      <section className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 className="text-base sm:text-lg font-semibold mb-4 border-b pb-2">Produksi Telur (30 Hari Terakhir)</h2>
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+          <table className="w-full text-left min-w-150">
             <thead>
               <tr className="text-gray-500 text-sm border-b">
                 <th className="pb-3 font-medium">Tanggal</th>

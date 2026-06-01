@@ -13,7 +13,7 @@ const initialState: EggLogState = {
 export default function EggQualityForm({ cages }: { cages: Cage[] }) {
   const [state, formAction, isPending] = useActionState(createEggLog, initialState);
   const { data: session } = useSession();
-  const isAdmin = (session?.user as any)?.role === "ADMIN";
+  const isAdmin = session?.user && (session.user as { role?: string }).role === "ADMIN";
 
   useEffect(() => {
     if (state.success) {
@@ -48,20 +48,20 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="cageId" className="block text-sm font-medium text-gray-700">Kandang</label>
               <select
-                id="kandang"
-                name="kandang"
+                id="cageId"
+                name="cageId"
                 required
-              className="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">Pilih Kandang</option>
-              {cages.map((cage) => (
-                <option key={cage.id} value={cage.id}>{cage.name}</option>
-              ))}
-            </select>
+                className="block w-full rounded-md border-gray-300 bg-gray-50 px-4 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="">Pilih Kandang</option>
+                {cages.map((cage) => (
+                  <option key={cage.id} value={cage.id}>{cage.name}</option>
+                ))}
+              </select>
             {state.errors?.cageId && (
               <p className="text-sm text-red-600">{state.errors.cageId[0]}</p>
             )}
@@ -71,11 +71,11 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
             <label htmlFor="date" className="block text-sm font-medium text-gray-700">Tanggal</label>
             <input
               type="date"
-              id="tanggal"
-              name="tanggal"
+              id="date"
+              name="date"
               required
               defaultValue={new Date().toISOString().split("T")[0]}
-              className="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="block w-full rounded-md border-gray-300 bg-gray-50 px-4 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             {state.errors?.date && (
               <p className="text-sm text-red-600">{state.errors.date[0]}</p>
@@ -83,18 +83,18 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-6 space-y-4">
           <div className="space-y-2">
             <label htmlFor="qualityS" className="block text-sm font-medium text-gray-700">Grade S (Kualitas Bagus)</label>
             <div className="relative">
               <input
                 type="number"
-                id="gradeS"
-                name="gradeS"
+                id="qualityS"
+                name="qualityS"
                 min="0"
                 required
                 placeholder="0"
-                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-3 pr-12 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-4 pr-12 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <span className="absolute right-3 top-2 text-gray-400 text-sm">Butir</span>
             </div>
@@ -108,12 +108,12 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
             <div className="relative">
               <input
                 type="number"
-                id="gradeR"
-                name="gradeR"
+                id="qualityR"
+                name="qualityR"
                 min="0"
                 required
                 placeholder="0"
-                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-3 pr-12 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-4 pr-12 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <span className="absolute right-3 top-2 text-gray-400 text-sm">Butir</span>
             </div>
@@ -127,12 +127,12 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
             <div className="relative">
               <input
                 type="number"
-                id="gradeP"
-                name="gradeP"
+                id="qualityP"
+                name="qualityP"
                 min="0"
                 required
                 placeholder="0"
-                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-3 pr-12 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="block w-full rounded-md border-gray-300 bg-gray-50 pl-4 pr-12 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <span className="absolute right-3 top-2 text-gray-400 text-sm">Butir</span>
             </div>
@@ -146,7 +146,7 @@ export default function EggQualityForm({ cages }: { cages: Cage[] }) {
           <button
             type="submit"
             disabled={isPending}
-            className={`w-full md:w-auto md:px-6 py-3 md:py-2 rounded-lg font-medium text-white transition-colors ${
+            className={`w-full rounded-lg px-6 py-3 text-sm font-medium text-white transition-colors ${
               isPending ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >

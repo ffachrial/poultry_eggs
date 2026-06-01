@@ -23,7 +23,7 @@ const categories = [
 export default function ExpenseForm() {
   const [state, formAction, isPending] = useActionState(createExpense, initialState);
   const { data: session } = useSession();
-  const isAdmin = (session?.user as any)?.role === "ADMIN";
+  const isAdmin = session?.user && (session.user as { role?: string }).role === "ADMIN";
 
   if (!isAdmin) {
     return (
@@ -59,7 +59,7 @@ export default function ExpenseForm() {
               name="date"
               defaultValue={new Date().toISOString().split('T')[0]}
               required
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             {state.errors?.date && (
               <p className="text-sm text-red-600">{state.errors.date[0]}</p>
@@ -72,7 +72,7 @@ export default function ExpenseForm() {
               id="category"
               name="category"
               required
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
               <option value="">Pilih Kategori</option>
               {categories.map(cat => (
@@ -93,7 +93,7 @@ export default function ExpenseForm() {
               min="1"
               required
               placeholder="0"
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             {state.errors?.amount && (
               <p className="text-sm text-red-600">{state.errors.amount[0]}</p>
@@ -107,7 +107,7 @@ export default function ExpenseForm() {
               name="description"
               rows={3}
               placeholder="Detail pengeluaran..."
-              className="w-full rounded-lg border-gray-300 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-3 text-base text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function ExpenseForm() {
           <button
             type="submit"
             disabled={isPending}
-            className={`w-full md:w-auto md:px-6 py-3 md:py-2 rounded-lg font-medium text-white transition-colors ${
+            className={`w-full rounded-lg px-6 py-3 text-base font-medium text-white transition-colors ${
               isPending ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
             }`}
           >

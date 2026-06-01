@@ -16,16 +16,16 @@ export default async function SalesPage() {
   });
 
   return (
-    <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6 md:space-y-8">
+    <div className="p-4 sm:p-6 md:p-8 max-w-5xl mx-auto space-y-6 md:space-y-8">
       <h1 className="text-xl md:text-2xl font-bold text-gray-800">Manajemen Penjualan</h1>
       
       <div className="grid grid-cols-1 gap-6 md:gap-8">
         <SaleForm />
 
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
           <h2 className="text-lg font-semibold mb-4">Riwayat Penjualan Terbaru</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
+          <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+            <table className="w-full text-left min-w-125">
               <thead>
                 <tr className="text-gray-500 text-sm border-b">
                   <th className="pb-3 font-medium">Tanggal</th>
