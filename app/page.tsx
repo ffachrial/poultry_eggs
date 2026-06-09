@@ -16,13 +16,13 @@ export default async function DashboardPage() {
   const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(today.getDate() - 7);
 
-  const [cageCount, recentEggLogs, totalSales, totalExpense, last7DaysSales] = await Promise.all([
-    prisma.cage.count(),
-    prisma.eggLog.findMany({
-      take: 5,
-      orderBy: { date: "desc" },
-      include: { cage: true },
-    }),
+    const [cageCount, recentEggLogs, totalSales, totalExpense, last7DaysSales] = await Promise.all([
+      prisma.cage.count(),
+      prisma.eggLog.findMany({
+        take: 10,
+        orderBy: { date: "desc" },
+        include: { cage: true },
+      }),
     prisma.sale.aggregate({
       _sum: { totalAmount: true },
     }),

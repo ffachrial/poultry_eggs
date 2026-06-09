@@ -18,8 +18,6 @@ const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, href: "/" },
   { name: "Kualitas Telur", icon: ClipboardCheck, href: "/egg-quality" },
   { name: "Log Harian Kandang", icon: FileText, href: "/daily-logs" },
-  { name: "Penjualan", icon: TrendingUp, href: "/sales" },
-  { name: "Keuangan", icon: Package, href: "/finance" },
   { name: "Laporan", icon: FileText, href: "/reports" },
 ];
 
