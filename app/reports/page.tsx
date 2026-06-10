@@ -115,7 +115,7 @@ export default async function ReportsPage() {
     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto space-y-6 md:space-y-8">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div className="flex flex-col items-center lg:flex-row lg:items-baseline lg:justify-between w-full">
-          <h1 className="text-xl lg:text-2xl font-bold text-gray-800 text-center lg:text-left">Laporan & Rekapitulasi</h1>
+          <h1 className="text-xl lg:text-2xl font-bold text-gray-800 text-center lg:text-left">Laporan Kualitas Telur</h1>
           <div className="flex flex-wrap justify-center gap-2 mt-4 lg:mt-0 print:hidden">
             <ExportButton
               data={eggLogs.flatMap(group =>
@@ -138,9 +138,6 @@ export default async function ReportsPage() {
            Periode: {thirtyDaysAgo.toLocaleDateString("id-ID")} - {new Date().toLocaleDateString("id-ID")}
          </p>
        </div>
-
-      {/* Production Chart */}
-      <ProductionChart data={chartData} />
 
       {/* Egg Production Report */}
       <section className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-100">
@@ -176,57 +173,6 @@ export default async function ReportsPage() {
           </table>
         </div>
       </section>
-
-      {/* Financial Summary Report */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold mb-4 border-b pb-2">Penjualan</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="text-gray-500 text-sm border-b">
-                  <th className="pb-3 font-medium">Tanggal</th>
-                  <th className="pb-3 font-medium">Pembeli</th>
-                  <th className="pb-3 font-medium text-right">Total</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {sales.map((sale) => (
-                  <tr key={sale.id} className="text-sm text-gray-900">
-                    <td className="py-3">{new Date(sale.date).toLocaleDateString("id-ID")}</td>
-                    <td className="py-3">{sale.buyerName}</td>
-                    <td className="py-3 text-right font-medium">Rp {sale.totalAmount.toLocaleString("id-ID")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h2 className="text-lg font-semibold mb-4 border-b pb-2">Pengeluaran</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="text-gray-500 text-sm border-b">
-                  <th className="pb-3 font-medium">Tanggal</th>
-                  <th className="pb-3 font-medium">Kategori</th>
-                  <th className="pb-3 font-medium text-right">Nominal</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {expenses.map((exp) => (
-                  <tr key={exp.id} className="text-sm text-gray-900">
-                    <td className="py-3">{new Date(exp.date).toLocaleDateString("id-ID")}</td>
-                    <td className="py-3">{exp.category}</td>
-                    <td className="py-3 text-right font-medium text-red-500">Rp {exp.amount.toLocaleString("id-ID")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
     </div>
   );
 }
