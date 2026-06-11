@@ -58,13 +58,6 @@ export default async function QualityChartPage() {
       {/* Production Chart */}
       <ProductionChart data={chartData} />
       
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mt-8">
-        <h3 className="text-lg font-semibold mb-4">Keterangan Grafik</h3>
-        <p className="text-gray-600 text-sm leading-relaxed">
-          Grafik di atas menunjukkan total produksi telur harian (akumulasi Grade S, Grade R, dan Grade P) untuk semua kandang selama bulan berjalan. 
-          Gunakan grafik ini untuk memantau tren produktivitas ayam petelur Anda secara keseluruhan.
-        </p>
-      </div>
     </div>
   );
 }
